@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.List;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfiguration {
@@ -59,13 +62,12 @@ public class SecurityConfiguration {
     @SneakyThrows
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .httpBasic();
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorizeHttpRequests ->
+                        authorizeHttpRequests
+                                .anyRequest()
+                                .authenticated()).authenticationProvider(authenticationProvider)
+                .httpBasic(withDefaults());
 
         return http.build();
     }
