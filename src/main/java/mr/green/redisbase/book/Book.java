@@ -1,10 +1,27 @@
 package mr.green.redisbase.book;
 
+import lombok.*;
+
+import java.io.Serializable;
 import java.util.List;
 
-public record Book(String id, int pageCount, String thumbnail, double price, String subtitle,
-                   String description, String language, String currency, String title,
-                   String infoLink, List<String> authors) {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
+public class Book implements Serializable {
 
-
+    private String id;
+    private int pageCount;
+    private String thumbnail;
+    private double price;
+    private String subtitle;
+    private String description;
+    private String language;
+    private String currency;
+    private String title;
+    private String infoLink;
+    private List<String> authors;
 }
