@@ -5,12 +5,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@ToString
+@Data
 public class Book implements Serializable {
 
     private String id;
