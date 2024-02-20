@@ -1,5 +1,6 @@
 package mr.green.redisbase.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
@@ -18,6 +19,7 @@ public class User implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     private UUID id;
+    @JsonIgnore
     private String password;
     private String name;
     private String email;
